@@ -54,7 +54,7 @@ class ExtractorModel: ObservableObject {
   }
   
   func extract() {
-    txt = txt.groups(pattern: things).joined(separator: "\n")
+    txt = txt.enfanged.groups(pattern: things).unique().joined(separator: "\n")
   }
   
   func startMonitoringPasteboard() {
@@ -80,7 +80,7 @@ class ExtractorModel: ObservableObject {
     guard let items = pb.pasteboardItems else { return }
     guard let item = items.first?.string(forType: .string) else { return } // you should handle multiple types
 
-    txt = item.groups(pattern: things).joined(separator: "\n")
+    txt = item.enfanged.groups(pattern: things).unique().joined(separator: "\n")
 
   }
   
@@ -122,7 +122,7 @@ class ExtractorModel: ObservableObject {
       
       progress = 1.0
       
-      txt = documentContent.string.groups(pattern: things).joined(separator: "\n")
+      txt = documentContent.string.enfanged.groups(pattern: things).unique().joined(separator: "\n")
 
       isLoading = false
       progress = 0.0
@@ -134,7 +134,7 @@ class ExtractorModel: ObservableObject {
   func extractFromTextFile(_ url: URL) {
     do {
       let documentContent = try String(contentsOf: url)
-      txt = documentContent.groups(pattern: things).joined(separator: "\n")
+      txt = documentContent.enfanged.groups(pattern: things).unique().joined(separator: "\n")
     } catch {
     }
   }
@@ -144,7 +144,7 @@ class ExtractorModel: ObservableObject {
       do {
         let rawContent = try Data(contentsOf: url)
         let documentContent = rawContent.htmlToString
-        self.txt = documentContent.groups(pattern: self.things).joined(separator: "\n")
+        self.txt = documentContent.enfanged.groups(pattern: self.things).unique().joined(separator: "\n")
       } catch {
       }
     }
@@ -157,7 +157,7 @@ class ExtractorModel: ObservableObject {
         do {
           let rawContent = try Data(contentsOf: urlToFetch!)
           let documentContent = rawContent.htmlToString
-          self.txt = documentContent.groups(pattern: self.things).joined(separator: "\n")
+          self.txt = documentContent.enfanged.groups(pattern: self.things).unique().joined(separator: "\n")
         } catch {
         }
       }

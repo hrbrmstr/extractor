@@ -2,6 +2,10 @@ import Foundation
 
 extension String{
   
+  var enfanged : String {
+    self.replacingOccurrences(of: "[.]", with: ".")
+  }
+  
   func groups(pattern: String) -> [String] {
     
     do {
