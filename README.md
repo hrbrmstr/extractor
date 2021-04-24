@@ -7,3 +7,5 @@ macOS 11.x+ app to extract indicators of compromise from web pages, PDFs, text f
 <img src="img/extractor-url.png" alt="Extractor with IoCs from URL" width="75%"/>
 
 File issues if you'd like support for other IoC types and output formats.
+
+Notarized builds are in GitHub Releases.
